@@ -9,7 +9,8 @@ Original file is located at
 
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
-
+os.environ["TRANSFORMERS_CACHE"] = "/work/09959/pratyu5467/.cache/huggingface/"
+os.environ["LLAMA_INDEX_CACHE_DIR"] = "/work/09959/pratyu5467/.cache/llama_index/"
 # Define the prompt template
 prompt_template = "https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged=1"
 #Given the ACLS website URL: https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged=1, write a Python web scraper using BeautifulSoup to extract the grant information. Your scraper should:
