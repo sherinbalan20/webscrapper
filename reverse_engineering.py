@@ -24,7 +24,7 @@ for page in range(1, 6):
     )
 
     def messages_to_prompt(messages):
-        prompt = "Given the ACLS website URL: https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged=1, write a Python web scraper using BeautifulSoup to extract the grant information. Your scraper should:\n"
+        prompt = "Given the ACLS website URL: https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged, write a Python web scraper using BeautifulSoup to extract the grant information. Your scraper should:\n"
         prompt += "- Use the requests library to get the HTML content of the page.\n"
         prompt += "- Use BeautifulSoup to parse the HTML content.\n"
         prompt += "- Find the class name or ID that contains the grant information.\n"
