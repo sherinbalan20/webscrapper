@@ -1,27 +1,34 @@
 import os
 from llama_index.llms import HuggingFaceLLM
 from llama_index.prompts import PromptTemplate
+
+# Set environment variables for Transformers and LLAMA_INDEX cache directories
 os.environ["TRANSFORMERS_CACHE"] = "/work/09959/pratyu5467/.cache/huggingface/"
 os.environ["LLAMA_INDEX_CACHE_DIR"] = "/work/09959/pratyu5467/.cache/llama_index/"
-# Define the prompt template
+
+# Define the ACLS website URL
+url = "https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged=1"
+# Define the prompt template for generating Python web scraping script
 prompt_template = """
-Given the ACLS website URL: https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged=1, 
-write a Python web scraper using BeautifulSoup to extract the grant information. Your scraper should:
+Import the necessary libraries for web scraping:
 - Use the requests library to get the HTML content of the page.
 - Use BeautifulSoup to parse the HTML content.
+
+Define the ACLS website URL:
+url = "https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged=1"
+
+Write a Python web scraper using BeautifulSoup to extract the grant information from the ACLS website:
+- Get the HTML content of the page using requests.
+- Parse the HTML content using BeautifulSoup.
 - Find the class name or ID that contains the grant information.
 - Extract the grant information and store it in a list.
 - Print the extracted grant information.
+
 """
 
-# Define the LLM model and tokenizer
-llm = HuggingFaceLLM(model_name="HuggingFaceH4/zephyr-7b-alpha", tokenizer_name="HuggingFaceH4/zephyr-7b-alpha")
+# Generate the Python web scraping script using llm.complete
+generated_code = llm.complete(PromptTemplate(prompt_template), max_tokens=500)
 
-# Define the prompt template
-prompt_template = PromptTemplate(prompt_template)
-
-# Generate the web scraping code using llm.complete
-generated_code = llm.complete(prompt_template, max_tokens=100000)
-
-# Print the generated code
+# Print the generated Python code
 print(generated_code)
+
