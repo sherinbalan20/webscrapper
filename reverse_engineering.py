@@ -13,15 +13,20 @@ base_url = "https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged="
 llm = HuggingFaceLLM(model_name="HuggingFaceH4/zephyr-7b-alpha", tokenizer_name="HuggingFaceH4/zephyr-7b-alpha")
 
 # Loop through all pages (replace 10 with the total number of pages)
-for page_num in range(1, 3):
-    # Define the prompt template with the current page number
-    prompt_template = base_url + str(page_num)
+for page_num in range(1, 11):  # Assuming there are 10 pages
+    # Define the full URL for the current page
+    page_url = base_url + str(page_num)
+
+    # Define the prompt template with the current page URL
+    prompt_template = page_url
     prompt_template = PromptTemplate(prompt_template)
 
-    # Generate the web scraping code using llm.complete
-    generated_code = llm.complete(prompt_template, max_tokens=500)
+    try:
+        # Generate the web scraping code using llm.complete
+        generated_code = llm.complete(prompt_template, max_tokens=2000)  # Increase max_tokens as needed
 
-    # Print the generated code
-    print(f"Generated code for page {page_num}:")
-    print(generated_code)
-
+        # Print the generated code
+        print(f"Generated code for page {page_num}:")
+        print(generated_code)
+    except Exception as e:
+        print(f"Error occurred while scraping page {page_num}: {e}")
