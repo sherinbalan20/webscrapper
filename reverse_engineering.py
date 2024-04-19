@@ -50,7 +50,7 @@ Write a Python web scraper using BeautifulSoup to extract the grant information 
 llm = HuggingFaceLLM(model_name="HuggingFaceH4/zephyr-7b-alpha", tokenizer_name="HuggingFaceH4/zephyr-7b-alpha")
 
 # Generate the Python web scraping script using llm.complete
-generated_code = llm.complete(PromptTemplate(prompt_template), max_tokens=500)
+generated_code = llm.complete(PromptTemplate(prompt_template), max_tokens=2048)
 
 # Print the generated Python code
 print(generated_code)
