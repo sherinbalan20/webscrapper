@@ -18,7 +18,14 @@ for page_num in range(1, 11):  # Assuming there are 10 pages
     page_url = base_url + str(page_num)
 
     # Define the prompt template with the current page URL
-    prompt_template = f"Extract grant information from the ACLS website page: {page_url}. Use BeautifulSoup to parse the HTML and extract relevant details."
+    prompt_template = """
+    Given the ACLS website URL: {}, write a Python web scraper using BeautifulSoup to extract the grant information. Your scraper should:
+    - Use the requests library to get the HTML content of the page.
+    - Use BeautifulSoup to parse the HTML content.
+    - Find the class name or ID that contains the grant information.
+    - Extract the grant information and store it in a list.
+    - Print the extracted grant information.
+    """.format(page_url)
 
     # Generate the web scraping code using llm.complete
     generated_code = llm.complete(prompt_template, max_tokens=2000)  # Increase max_tokens as needed
