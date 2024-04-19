@@ -14,6 +14,19 @@ grant_info = "List of grant information"
 
 # Define the prompt template for generating Python web scraping script
 prompt_template = f"""
+def messages_to_prompt(messages):
+for message in messages:
+        if message.role == 'system':
+            prompt += f"\n{message.content}</s>\n"
+        elif message.role == 'user':
+            prompt += f"\n{message.content}</s>\n"
+        elif message.role == 'assistant':
+            prompt += f"\n{message.content}</s>\n"
+
+    if not prompt.startswith("\n"):
+        prompt = "\n</s>\n" + prompt
+    prompt = prompt + "\n"
+
 Import the necessary libraries for web scraping:
 - Use the requests library to get the HTML content of the page.
 - Use BeautifulSoup to parse the HTML content.
