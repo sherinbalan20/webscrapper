@@ -1,7 +1,7 @@
 import openai
 
 # Set your OpenAI API key
-api_key = "capstone"
+api_key = "sk-proj-vTVFSGpSD0UzkY7eCQtYT3BlbkFJqAG7XcfMoN1j9IVE3pp9"
 openai.api_key = api_key
 
 # Define the prompt for code generation
