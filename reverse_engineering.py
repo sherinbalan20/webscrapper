@@ -8,14 +8,21 @@ os.environ["LLAMA_INDEX_CACHE_DIR"] = "/work/09959/pratyu5467/.cache/llama_index
 
 # Define the ACLS website URL
 url = "https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged=1"
+
+# Define the grant information
+grant_info = "List of grant information"
+
 # Define the prompt template for generating Python web scraping script
-prompt_template = """
+prompt_template = f"""
 Import the necessary libraries for web scraping:
 - Use the requests library to get the HTML content of the page.
 - Use BeautifulSoup to parse the HTML content.
 
 Define the ACLS website URL:
-url = "https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged=1"
+url = "{url}"
+
+Define the grant information:
+grant_info = "{grant_info}"
 
 Write a Python web scraper using BeautifulSoup to extract the grant information from the ACLS website:
 - Get the HTML content of the page using requests.
@@ -26,9 +33,11 @@ Write a Python web scraper using BeautifulSoup to extract the grant information 
 
 """
 
+# Define the LLM model and tokenizer
+llm = HuggingFaceLLM(model_name="HuggingFaceH4/zephyr-7b-alpha", tokenizer_name="HuggingFaceH4/zephyr-7b-alpha")
+
 # Generate the Python web scraping script using llm.complete
 generated_code = llm.complete(PromptTemplate(prompt_template), max_tokens=500)
 
 # Print the generated Python code
 print(generated_code)
-
