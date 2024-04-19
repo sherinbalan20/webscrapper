@@ -18,16 +18,11 @@ for page_num in range(1, 11):  # Assuming there are 10 pages
     page_url = base_url + str(page_num)
 
     # Define the prompt template with the current page URL
-    prompt_template = page_url
-    prompt_template = PromptTemplate(prompt_template)
+    prompt_template = f"Extract grant information from the ACLS website page: {page_url}. Use BeautifulSoup to parse the HTML and extract relevant details."
 
-    try:
-        # Generate the web scraping code using llm.complete
-        generated_code = llm.complete(prompt_template, max_tokens=2000)  # Increase max_tokens as needed
+    # Generate the web scraping code using llm.complete
+    generated_code = llm.complete(prompt_template, max_tokens=2000)  # Increase max_tokens as needed
 
-        # Print the generated code
-        print(f"Generated code for page {page_num}:")
-        print(generated_code)
-    except Exception as e:
-        print(f"Error occurred while scraping page {page_num}: {e}")
-
+    # Print the generated code
+    print(f"Generated code for page {page_num}:")
+    print(generated_code)
