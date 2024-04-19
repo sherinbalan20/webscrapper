@@ -30,3 +30,4 @@ for page_num in range(1, 11):  # Assuming there are 10 pages
         print(generated_code)
     except Exception as e:
         print(f"Error occurred while scraping page {page_num}: {e}")
+
