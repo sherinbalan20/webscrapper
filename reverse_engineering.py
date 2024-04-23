@@ -1,26 +1,25 @@
-import openai
+import os
+from llama_index.llms import HuggingFaceLLM
+from llama_index.prompts import PromptTemplate
 
-# Set your OpenAI API key
-api_key = "sk-proj-vTVFSGpSD0UzkY7eCQtYT3BlbkFJqAG7XcfMoN1j9IVE3pp9"
-openai.api_key = api_key
+os.environ["TRANSFORMERS_CACHE"] = "../.cache/huggingface/" # set cache dir for transformers
+os.environ["LLAMA_INDEX_CACHE_DIR"] = "../.cache/llama_index/"
 
-# Define the prompt for code generation
-prompt = """
-Generate a Python web scraping script using BeautifulSoup to extract grant information from the ACLS website.
-The script should:
-- Use the requests library to get the HTML content of the page.
-- Use BeautifulSoup to parse the HTML content.
-- Find the class name or ID that contains the grant information.
-- Extract the grant information and store it in a list.
-- Print the extracted grant information.
+# Define the prompt template
+prompt_template = """
+Generate Python code to scrape grant information from the ACLS website for the year 2023.
+Use BeautifulSoup to parse the HTML content.
+Print the extracted grant information.
 """
 
-# Request code generation from Codex
-response = openai.Completion.create(
-  engine="text-codex",  # Specify the Codex engine
-  prompt=prompt,
-  max_tokens=500,        # Limit the number of tokens in the response
-)
+# Define the LLM model and tokenizer
+llm = HuggingFaceLLM(model_name="HuggingFaceH4/zephyr-7b-alpha", tokenizer_name="HuggingFaceH4/zephyr-7b-alpha")
 
-# Print the generated Python code
-print(response.choices[0].text.strip())
+# Define the prompt template
+prompt_template = PromptTemplate(prompt_template)
+
+# Generate the Python code using llm.complete
+generated_code = llm.complete(prompt_template, max_tokens=2048)
+
+# Print the generated code
+print(generated_code)
