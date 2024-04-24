@@ -17,7 +17,7 @@ from llama_index.prompts import PromptTemplate
 from llama_index.readers import TrafilaturaWebReader
 from llama_index import VectorStoreIndex, ServiceContext, SummaryIndex
 
-root_url = "https://www.acls.org/fellows-grantees/?_fellow_year=2023&_paged="
+root_url = "https://www.acls.org/fellows-grantees/?_fellow_year=&_paged="
 # Update the range to include URLs for 5 pages
 urls = [root_url + str(i) for i in range(1, 6)]
 
